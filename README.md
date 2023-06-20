@@ -123,4 +123,4 @@ checking for data unbalancing, visualizing the features and understanding the re
 
 **Marc Vaccaro**
 
-[**PORTFOLIO**](https://personal-website-marc316.vercel.app/) | [**GITHUB**](https://github.com/marc316) | [**BLOG**](https://  personal-website-marc316.vercel.app/blog)
+[**PORTFOLIO**](https://personal-website-marc316.vercel.app/) | [**GITHUB**](https://github.com/marc316) | [**BLOG**](https://personal-website-marc316.vercel.app/blog)
