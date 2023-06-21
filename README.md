@@ -1,121 +1,165 @@
-# Fraud-detection-Machine-Learning
+# Amazon Clone Website with MEAN Stack
 
-Credit card fraud detection machine learning project source code and presentation.
+## Description
+Develop a web application for a storefront that allows browsing items, creating, editing and saving a
+shopping cart, simulate purchasing items, managing a wish list and sharing it with other users and
+commenting on items.
 
-<!-- TOC -->
+Use of Node.js and Angular v7 is required. Other technologies may include Mongodb and Express or any
+alternatives that suit you better.
 
-- [1. DEMO](#1-demo)
-- [2. Abstract](#2-abstract)
-- [3. Aims & Objectives](#3-aims--objectives)
-- [4. METHODOLOGY](#4-methodology)
-  - [4.1. Data Description:](#41-data-description)
-  - [4.2. Process](#42-process)
-- [5. EVALUATION](#5-evaluation)
-  - [5.1. Precision-Recall Curve comparison:](#51-precision-recall-curve-comparison)
-- [6. GUI](#6-gui)
-- [7. SUMMARY](#7-summary)
-- [8. Author](#8-author)
+## Stack:
 
-<!-- /TOC -->
+Node js - 8.10.0
+Angular CLI - 7.0.7
+MongoDB shell version - v3.6.0
+ 
+## Requirements (70 points)
 
-<a id="markdown-1-demo" name="1-demo"></a>
+1. Authentication method: { total 10 points }
 
-## 1. DEMO
+- Local authentication which uses email as the username and require a password. { 4 points }
+- Input validation for email (proper format). { 1 point }
+- Password stored using a hashing algorithm that is resistant to brute force attacks (e.g. bcrypt). { 1 point }
+- Verification of of email (see References). { 3 points }
+- If the account is marked as deactivated, show a message asking to contact the store manager and not allow logging in: { 1 point }
 
-[**DEMO**](./Project%20DEMO%20Video.mp4')
+2. Limited functionality for unauthenticated users: { total 10 points }
 
-<a id="markdown-2-abstract" name="2-abstract"></a>
+- Start page showing application name, a short “about” blurb that says what the site offers, and login button. { 2 points }
+- List of purchasable items (up to 10) ordered by popularity (e.g. number of users who bought that item or average rating). { 3 points }
+- Ability to browse the entire catalogue of items: { 2 points }
+- Clicking on an item shows a description about the item and price at the time of click. Live updates are not necessary. { 1 point }
+- Item description includes upto 5 comments. Comments must show the rating, the comment and commentor’s username: { 2 points }
 
-## 2. Abstract
+3. Additional functionality for authenticated users: { total 26 points }
 
-In modern day’s credit card plays an important role in every person’s daily activity. Customer purchases their needs with their credit cards and online transitions. Banks and financial institutes consider denying the credit applications of customers to avoid the risk of defaulters. Credit risk is the rise of debt on the customer who fails to make the billing payment for some period. The purpose of the project is how to reduce the defaulters among the list of customers, and make a background check on whether to provide the loan or not and to find the promising customers. These predictive models would benefit the lending institutions and to the customers as it would make them more aware of their potential defaulting rate. The problem is a binary classification problem whether a customer will be defaulting to pay next month payment. The dataset is unbalanced so the focus was on the precision and recall more than the accuracy metrics. After comparison with precision-recall curve, logistic regression is the best model based on the False Negative value of confusion metrics. Moreover, after changing the threshold value of the logistic regression, GUI (Graphical user interface) implemented and predicted whether a customer is defaulter or not-defaulter.
+- Add items to a shopping cart: { 1 point }
+- Remove items in the shopping cart: { 1 point }
+- Change quantities of items in the shopping cart: { 1 point }
+- Clear the shopping cart: { 1 point }
+- A ‘Buy’ button to simulate the purchase of items in the shopping cart: { 1 point }
+- Ensure that item stock levels are updated through every action above: { 4 points }
+- Add a comment and a rating (1-5 stars) to any item: { 4 points }
+- Create a list of items and quantities with a name, a description and a visibility setting of “private” (default) or “public”: { 6 points }
+- Edit all aspects of an own item collection: { 2 points }
+- View, delete or rename own item collections: { 2 points }
+- View item collections from other users that are marked as “public”: { 3 points }
 
-<a id="markdown-3-aims--objectives" name="3-aims--objectives"></a>
+4. Store manager functionality related to store maintenance: { total 16 points }
+- Special user with store manager access: { 2 points }
+- Ability to grant store manager privilege to one or more existing users: { 2 points }
+- Ability to add/modify/delete items, quantities and prices: { 6 points }
+- Ability to mark a comment as hidden: { 2 points }
+- Ability to mark a user as “deactivated”: { 2 points }
 
-## 3. Aims & Objectives
+5. Web service API: { total 10 points }
+- Provide an API that has at least four nouns (URLs) and at least 8 separate noun+ HTTP verb combinations. You must have at least two nouns that support two or more verbs. { 8 points }
+- Build your application using this API. { 2 points }
 
-The problem is to classify the defaulters and non-defaulters on the credit payment of the customers. This project is helpful for solving the real problem by using various classification techniques. Moreover, any user can access GUI and add their gender, education, marital status and payment details to check next month in which category they fall (defaulter or non-defaulter).
-The core objectives: Find whether the customer could pay back his next credit amount or not and Identify some potential customers for the bank who can settle their credit balance.
-The steps followed to manage these goals:
+6. Usability and code quality: { up to -24 points }
+- Resistant to HTML and JavaScript injection attacks: { up to -2 point }
+- Able to handle user input in any language: { up to -2 point }
+- Usability of the application on multiple browsers and form factors. { up to -2 point }
+- Modular code that is easily extensible and maintainable. { up to -2 point } E.g. Changes to operational parameters such as server names, port numbers etc should not cause changes in code.
+- Avoid code duplication. { up to -2 point } E.g. Full URLs that are duplicated in calls to ReST api
+- Avoid hard-coded literals in code. { up to -5 points } E.g. Hard-coded port numbers, URLS
+- Frequent git commits with meaningful comments { up to -2 points }
+- Sufficient and meaningful comments in code { up to -2 points }
+- Proper precautions in saving user information { up to -5 points } 
+ 
+## Node JS:
 
-- Selection of dataset
-- Display some graphical information and visualize the features.
-- Check Null values in the dataset
-- Data pre-processing using one-hot encoding and remove extra parameters
-- Train with classifiers
-- Evaluate the model with test data
-- Compare the accuracy, precision and recall finding the optimal model.
-- Created a Graphical User Interface to check with real time customer data and predict defaulter for their next month payment
+server.js
+models:
+  cart.js     - store all user cart details 
+  collection.js - customize collection list for all users 
+  order.js    - final order
+  product.js    - product list
+  review.js   - review and comment of product
+  token.js    - token to activate account
+  user.js     - user details
+route:
+  module.js 
+    - files included
 
-<a id="markdown-4-methodology" name="4-methodology"></a>
+  account.js
+    - /api/signup
+    - /api/login
+    - /api/confirmation/:token
+    - /api/updateprofile
+    
+  admin.js
+    - /admin/getProducts
+    - /admin/product (add / update)
+    - /admin/deleteProduct
+    - /admin/getUsers
+    - /admin/changeUserStatus
+    - /admin/changeManagerStatus
+    - /admin/commentStatus
+    
+  collection.js
+    - /api/collections
+    - /api/usercollection
+    - /api/addCollection
+    - /api/collectionDetails/:id
+    - /api/updateCollection
+    - /api/updateCollectionProduct
+    - /api/deleteCollection 
+    
+  products.js 
+    - /api/products     
+    - /api/findProduct/:id 
+    - /api/review 
+    
+  user.js
+    - /api/profile (dashboard)
+    - /admin    (dashboard)
+    - /api/cart
+    - /api/order
+    - /api/addtocart
+    - /api/removeProduct
+    - /api/clearCart
+    - /api/orderCart
+    
+  
+## Angular:
+  Services:
+    - alert.service
+    - restapi.service
+    - user.service
+    
+  Components:
+    - admin
+      - users
+      - products
+    - alert
+    - cart
+    - collection
+    - home
+    - login
+    - manager
+    - profile
+    - regestration
+    
 
-## 4. METHODOLOGY
+## Resources
 
-In methodology, data description, independent variable and dependent variable described with scale of variables. Moreover, in the process data preprocessing and feature engineering described as below.
+Token Authentication:
+URL: https://codemoto.io/coding/nodejs/email-verification-node-express-mongodb
 
-<a id="markdown-41-data-description" name="41-data-description"></a>
+NavBar Header:
+https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp
 
-### 4.1. Data Description:
+E-commerce View:
+https://mdbootstrap.com/docs/angular/sections/e-commerce/#APIref
 
-This dataset consists of 30000 total instances and 25 features
-including
+Validation:
+https://www.w3resource.com/javascript/form/email-validation.php
 
-The total number of customer based on defaulter and nondefaulter
-from a dataset.
-
-![No: of defaulters and non-defaulters](graph/1.1.png)
-
-![Graph](graph/6.png)
-
-<a id="markdown-42-process" name="42-process"></a>
-
-### 4.2. Process
-
-The first step is data preprocessing. Data preprocessing used to
-convert the raw data into a clean data set.
-
-- ID column dropped as its unnecessary for our modeling.
-- The attribute name ‘PAY_0’ converted to ‘PAY_1’ for naming convenience.
-- Numeric attributes converted to nominal.
-- One hot encoding which is a process by which categorical variables converted into a dummy form that provided to algorithms to do a better job in prediction. One hot encoder used to perform linearization of data. For instance, value in the ‘EDUCATION’ variables were grouped such that the values ‘0, 4, 5, 6’ was combined to one value and assigned a value ‘4’.
-
-<a id="markdown-5-evaluation" name="5-evaluation"></a>
-
-## 5. EVALUATION
-
-The graphical representation shown below to have a better
-understanding of the accuracy, precision and recall we have
-achieved using various algorithms.
-
-![Result](graph/h1.png)
-
-<a id="markdown-51-precision-recall-curve-comparison" name="51-precision-recall-curve-comparison"></a>
-
-### 5.1. Precision-Recall Curve comparison:
-
-The below graphical representation PRC comparison of various
-algorithms. By comparing algorithms, a Voting classifier has
-good accuracy but when we draw PRC, it shows that Logistic
-regression has good Precision-Recall value at threshold 0.5. So,
-while changing threshold values, it improves the Precision and
-Recall values.
-
-![Curve](graph/h3.png)
-
-<a id="markdown-6-gui" name="6-gui"></a>
-
-## 6. GUI
-
-![GUI](./graph/image.png)
-
-<a id="markdown-7-summary" name="7-summary"></a>
-
-## 7. SUMMARY
-
-This would inform the issuer’s decisions on who to give a credit card to and what credit limit to provide. We investigated the data,
-checking for data unbalancing, visualizing the features and understanding the relationship between different features. We used both train-validation split and cross-validation to evaluate the model effectiveness to predict the target value, i.e. detecting if a credit card client will default next month. We then investigated five predictive models: We started with Logistic Regression, Naïve bayes, SVM, KNN, Classification Tree and Feed-forward NN and Voting classifier accuracy is almost same. We choose based model Logistic regression based on minimum value of False Negative from confusion metrix.
-
-<a id="markdown-8-author" name="8-author"></a>
+Checkbox:
+https://stackoverflow.com/questions/34997128/angular-2-get-values-of-multiple-checked-checkboxes
+https://mdbootstrap.com/docs/angular/advanced/carousel/#multi-item-carousel   
 
 <hr/>
 
